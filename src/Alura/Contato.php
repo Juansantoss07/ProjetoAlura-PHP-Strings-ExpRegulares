@@ -9,8 +9,9 @@ class Contato
 	private $usuario;
 	private $endereco;
 	private $cep;
+	private $telefone;
 	
-	function __construct(string $email, string $endereco, string $cep)
+	function __construct(string $email, string $endereco, string $cep, string $telefone)
 	{
 		$this->email = $email;
 
@@ -20,6 +21,7 @@ class Contato
 
 		$this->endereco = $endereco;
 		$this->cep = $cep;
+		$this->telefone = $telefone;
 
 	}
 
@@ -41,5 +43,10 @@ class Contato
 	{
 		$enderecoEcep = [$this->endereco, $this->cep];
 		return implode(" - ", $enderecoEcep);
+	}
+
+	public function getTelefone():string
+	{
+		return $this->telefone;
 	}
 }

@@ -7,8 +7,9 @@ class Usuario
 	private $nome;
 	private $sobrenome;
 	private $senha;
+	private $tratamento;
 
-	function __construct($nome, $senha)
+	function __construct($nome, $senha, $genero)
 	{
 		$nomeSobrenome = explode(" ", $nome, 2);
 
@@ -25,6 +26,8 @@ class Usuario
 		};
 
 		$this->VerficarTamanhoSenha($senha);
+
+		$this->TratamentoGeneroSobrenome($nome, $genero);
 
 	}
 
@@ -43,6 +46,21 @@ class Usuario
 		return $this->senha;
 	}
 
+	public function getTratamento():string
+	{
+		return $this->tratamento;
+	}
+
+	private function TratamentoGeneroSobrenome($nome, $genero)
+	{	
+		if ($genero === 'M'){
+			$this->tratamento = preg_replace('/^(\w+) \b/', 'Sr. ', $nome, 1);
+		}
+
+		if ($genero === 'F') {
+			$this->tratamento = preg_replace('/^(\w+) \b/', 'Sra. ', $nome, 1);
+		}
+	}
 
 	private function VerficarTamanhoSenha(string $senha)
 	{

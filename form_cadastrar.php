@@ -37,7 +37,7 @@
 
             <div class="form-group">
                 <label for="telefone">Telefone:</label>
-                <input type="text" id="telefone" name="telefone" class="form-control" placeholder="Digite a sua senha">
+                <input type="string" id="telefone" name="telefone" class="form-control" placeholder="Digite a sua senha">
             </div>
 
             <div class="form-group">
