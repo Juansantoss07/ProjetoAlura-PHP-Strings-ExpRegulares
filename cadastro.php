@@ -20,15 +20,15 @@ $contato = new App\Alura\Contato($_POST['email'], $_POST['endereco'], $_POST['ce
 
 <div class="mx-5 my-5">
 <h1>Cadastro feito com sucesso.</h1>
-<p>Olá, <?php echo $usuario->getTratamento(); ?>. Seguem os dados de sua conta:</p>
+<p>Olá, <?php echo htmlspecialchars($usuario->getTratamento()); ?>. Seguem os dados de sua conta:</p>
 <ul class="list-group">
-    <li class="list-group-item">Primeiro nome: <?php echo $usuario->getName(); ?> </li class="list-group-item">
-    <li class="list-group-item">Sobrenome: <?php echo $usuario->getSobrenome(); ?> </li class="list-group-item">
-    <li class="list-group-item">Usuário: <?php echo $contato->getUsuario(); ?> </li class="list-group-item">
-    <li class="list-group-item">Senha:<?php echo $usuario->getSenha(); ?> </li class="list-group-item">
-    <li class="list-group-item">Telefone: <?php echo $contato->getTelefone() ?> </li class="list-group-item">
-    <li class="list-group-item">Email: <?php echo $contato->getEmail(); ?> </li class="list-group-item">
-    <li class="list-group-item">Endereço: <?php echo $contato->getEnderecoCep(); ?></li class="list-group-item">
+    <li class="list-group-item">Primeiro nome: <?php echo htmlspecialchars($usuario->getName()); ?> </li class="list-group-item">
+    <li class="list-group-item">Sobrenome: <?php echo htmlspecialchars($usuario->getSobrenome()); ?> </li class="list-group-item">
+    <li class="list-group-item">Usuário: <?php echo htmlspecialchars($contato->getUsuario()); ?> </li class="list-group-item">
+    <li class="list-group-item">Senha:<?php echo htmlspecialchars($usuario->getSenha()); ?> </li class="list-group-item">
+    <li class="list-group-item">Telefone: <?php echo htmlspecialchars($contato->getTelefone()) ?> </li class="list-group-item">
+    <li class="list-group-item">Email: <?php echo htmlspecialchars($contato->getEmail()); ?> </li class="list-group-item">
+    <li class="list-group-item">Endereço: <?php echo htmlspecialchars($contato->getEnderecoCep()); ?></li class="list-group-item">
 </ul>
 </div>
 </body>

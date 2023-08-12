@@ -1,52 +1,80 @@
 <?php
 
 namespace App\Alura;
- 
+
 class Contato
 {
 
-	private $email;
-	private $usuario;
-	private $endereco;
-	private $cep;
-	private $telefone;
-	
-	function __construct(string $email, string $endereco, string $cep, string $telefone)
-	{
-		$this->email = $email;
+    private $email;
+    private $endereco;
+    private $cep;
+    private $telefone;
 
-		$arroba = strpos($this->email, '@');
+    public function __construct(string $email, string $endereco, string $cep, string $telefone)
+    {
+        $this->email = $email;
 
-		$this->usuario = substr($this->email, 0, $arroba);
+        if ($this->validaEmail($email) !== false) {
+            $this->setEmail($email);
+        } else {
+            $this->setEmail("Email inválido");
+        }
 
-		$this->endereco = $endereco;
-		$this->cep = $cep;
-		$this->telefone = $telefone;
+        if ($this->validaTelefone($telefone)) {
+            $this->setTelefone($telefone);
+        } else {
+            $this->setTelefone("Telefone inválido");
+        }
 
-	}
+        $this->endereco = $endereco;
+        $this->cep = $cep;
+    }
 
-	public function getUsuario():string
-	{
-		if($this->email === "" or $this->email === null) {
-			return "E-mail inválido";
-		} else {
-			return $this->usuario;
-		}
-	}
+    private function validaTelefone(string $telefone): int
+    {
+        return preg_match('/^9[0-9]{4}-[0-9]{4}$/', $telefone, $encontrados);
+    }
 
-	public function getEmail():string
-	{
-		return $this->email;	
-	}
+    private function setTelefone(string $telefone): void
+    {
+        $this->telefone = $telefone;
+    }
 
-	public function getEnderecoCep():string
-	{
-		$enderecoEcep = [$this->endereco, $this->cep];
-		return implode(" - ", $enderecoEcep);
-	}
+    private function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
 
-	public function getTelefone():string
-	{
-		return $this->telefone;
-	}
+    public function getUsuario(): string
+    {
+        $posicaoArroba = strpos($this->email, "@");
+
+        if ($posicaoArroba === false) {
+            return "Usuario Inválido";
+        }
+
+        return substr($this->email, 0, $posicaoArroba);
+    }
+
+    private function validaEmail(string $email)
+    {
+        return filter_var($email, FILTER_VALIDATE_EMAIL);
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getEnderecoCep(): string
+    {
+        $enderecoCep = [$this->endereco, $this->cep];
+        return implode(" - ", $enderecoCep);
+    }
+
+    public function getTelefone(): string
+    {
+        return $this->telefone;
+    }
+
 }
